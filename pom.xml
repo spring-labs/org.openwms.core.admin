@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.openwms</groupId>
         <artifactId>org.openwms.parent</artifactId>
-        <version>26</version>
+        <version>27</version>
         <relativePath />
     </parent>
     <artifactId>org.openwms.core.admin</artifactId>
@@ -28,8 +28,8 @@
 
 	<scm>
 		<url>https://github.com/spring-labs/${project.artifactId}</url>
-		<connection>scm:git:https://${scmuser}github.com/spring-labs/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:https://${scmuser}github.com/spring-labs/${project.artifactId}.git</developerConnection>
+		<connection>scm:git:https://github.com/spring-labs/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:https://github.com/spring-labs/${project.artifactId}.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -65,10 +65,8 @@
 	</ciManagement>
 
 	<properties>
-		<guava.version>32.0.0-jre</guava.version>
-		<servo-core.version>0.12.21</servo-core.version>
-		<spring-boot-admin.version>3.2.3</spring-boot-admin.version>
-		<spring-cloud-dependencies.version>2023.0.3</spring-cloud-dependencies.version>
+		<spring-boot-admin.version>3.4.0</spring-boot-admin.version>
+		<spring-cloud-dependencies.version>2024.0.0</spring-cloud-dependencies.version>
 	</properties>
 
 	<build>
@@ -95,17 +93,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${guava.version}</version>
-            </dependency>
-            <dependency>
-				<!-- Clash in org.springframework.cloud:spring-cloud-starter-stream-rabbit -->
-				<groupId>com.netflix.servo</groupId>
-				<artifactId>servo-core</artifactId>
-				<version>${servo-core.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
@@ -156,39 +143,6 @@
 
 	<repositories>
 		<repository>
-			<id>interface21-snapshots</id>
-			<name>Interface21.io Snapshot Repository</name>
-			<url>https://repo.openwms.cloud/repository/maven-snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>interface21-releases</id>
-			<name>Interface21.io Release Repository</name>
-			<url>https://repo.openwms.cloud/repository/maven-releases</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
 			<id>sonatype-nexus-staging</id>
 			<name>Staging Repository</name>
 			<url>https://oss.sonatype.org/content/groups/staging/</url>
@@ -199,51 +153,5 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
 </project>
