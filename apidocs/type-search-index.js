@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"org.openwms.core.admin.app","l":"AdminSecurityConfiguration"},{"p":"org.openwms.core.admin","l":"AdminStarter"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"}];updateSearchResults();

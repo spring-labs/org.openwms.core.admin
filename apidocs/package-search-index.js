@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.openwms.core.admin"},{"l":"org.openwms.core.admin.app"}];updateSearchResults();
