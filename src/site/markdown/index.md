@@ -27,4 +27,4 @@ Supported Spring profiles:
 | ------------ |-----------------------------------------------------------------------------------------------------------------------------|
 | `ELK` | All logs and traces are pushed to Logstash (via syslog) expected to listen on a server with hostname `elk` and port `5000`  | 
 
-[1]: ../../../src/site/resources/overview.png
+[1]: ../resources/images/overview.png
