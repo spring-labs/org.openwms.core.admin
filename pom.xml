@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.openwms</groupId>
         <artifactId>org.openwms.parent</artifactId>
-        <version>27.1</version>
+        <version>27.2</version>
         <relativePath/>
     </parent>
     <artifactId>org.openwms.core.admin</artifactId>
@@ -66,7 +66,7 @@
 
     <properties>
         <error_prone_annotations.version>2.28.0</error_prone_annotations.version>
-        <spring-boot-admin.version>3.4.0</spring-boot-admin.version>
+        <spring-boot-admin.version>3.4.5</spring-boot-admin.version>
         <spring-cloud-dependencies.version>2024.0.0</spring-cloud-dependencies.version>
     </properties>
 
