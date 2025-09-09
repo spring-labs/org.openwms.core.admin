@@ -8,7 +8,7 @@
         <relativePath />
     </parent>
     <artifactId>org.openwms.core.admin</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>OpenWMS.org CORE: Administration UI</name>
     <description>An administration UI built on top of Spring Boot Admin</description>
     <url>https://github.com/spring-labs/${project.artifactId}</url>
