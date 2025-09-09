@@ -8,23 +8,29 @@ components of a typical microservice application built with Spring Boot.
 ![overview][1]
 
 The main purpose in production is to control the log level of single components and categories as well as controlling caches. Viewing the
-logs is done with a centralized log monitoring system.
+application logs is usually done with a centralized log monitoring system.
 
 Additional configuration parameter has been added or preset to the configuration parameters of [Spring Boot Admin Server](https://github.com/codecentric/spring-boot-admin):
 
-| Configuration parameter name | Default value | Description |
-|------------------------------| ----- | ----- |
-| `owms.admin.start-page`      | `/wallboard` | The existing wallboard page shall be the start page after login. Possible values ``, `/application` |
-| `owms.eureka.url`            | `http://user:sa@localhost:8761` | URI to connect to the discovery server |
-| `owms.eureka.zone`           | `${owms.eureka.url}/eureka/` | URI to get the zone settings from Eureka discovery server |
-| `owms.srv.hostname`          | `localhost` | Hostname that is used to register the Admin UI at the discovery server |
-| `owms.srv.protocol`          | `http` | Port that is used to register the Admin UI at the discovery server |
-| `server.port`                | `${PORT:8155}` | Port where the Admin UI web server listening at |
+| Configuration parameter name | Default value                   | Description                                                                                         |
+|------------------------------|---------------------------------|-----------------------------------------------------------------------------------------------------|
+| `owms.admin.start-page`      | `/wallboard`                    | The existing wallboard page shall be the start page after login. Possible values ``, `/application` |
+| `owms.eureka.hostname`       | `localhost`                     | Hostname where the discovery server is running                                                      |
+| `owms.eureka.port`           | `8761`                          | Port of the discovery server instance                                                               |
+| `owms.eureka.url`            | `http://user:sa@localhost:8761` | URI to connect to the discovery server - a combination or hostname, port, username and password     |
+| `owms.eureka.user.name`      | `user`                          | User's name to access the discovery server                                                          |
+| `owms.eureka.user.password`  | `sa`                            | User's password to access to the discovery server                                                   |
+| `owms.eureka.zone`           | `${owms.eureka.url}/eureka/`    | URI to get the zone settings from Eureka discovery server                                           |
+| `owms.srv.hostname`          | `localhost`                     | Hostname that is used to register the Admin UI at the discovery server                              |
+| `owms.srv.protocol`          | `http`                          | Port that is used to register the Admin UI at the discovery server                                  |
+| `owms.tracing.url`           | `http://localhost:4317`         | URL to the OpenTelemetry server                                                                     |
+| `server.port`                | `${PORT:8155}`                  | Port where the Admin UI web server listening at                                                     |
 
 Supported Spring profiles:
 
-| Profile name | Description                                                                                                                 |
-| ------------ |-----------------------------------------------------------------------------------------------------------------------------|
-| `ELK` | All logs and traces are pushed to Logstash (via syslog) expected to listen on a server with hostname `elk` and port `5000`  | 
+| Profile name | Description                                                                                                                |
+|--------------|----------------------------------------------------------------------------------------------------------------------------|
+| `ELK`        | All logs and traces are pushed to Logstash (via syslog) expected to listen on a server with hostname `elk` and port `5000` | 
+| `LOKI`       | All logs and traces are pushed to a Loki server (expected to listen on a server with hostname `loki` and port `3100`       | 
 
 [1]: src/site/resources/images/overview.png
