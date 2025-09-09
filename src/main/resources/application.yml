@@ -33,12 +33,12 @@ spring:
         favicon: "assets/leaf.png"
         favicon-danger: "assets/leaf.png"
       client:
-        username: ${spring.security.user.name}       #These two are needed so that the client
-        password: ${spring.security.user.password}   #can register at the protected server api
+        username: ${spring.security.user.name}       # Username
+        password: ${spring.security.user.password}   # and password in case the SBA Server api is protected with HTTP Basic authentication
         instance:
           metadata:
-            user.name: ${spring.security.user.name}         #These two are needed so that the server
-            user.password: ${spring.security.user.password} #can access the protected client endpoints
+            user.name: ${spring.security.user.name}         # Share username
+            user.password: ${spring.security.user.password} # and password in case the SBA Server api is protected with HTTP Basic authentication
   jmx:
     enabled: true
   main:
@@ -52,11 +52,18 @@ owms:
   admin:
     start-page: "/wallboard"
   eureka:
-    url: http://user:sa@localhost:8761
+    hostname: localhost
+    port: 8761
+    url: http://${owms.eureka.user.name}:${owms.eureka.user.password}@${owms.eureka.hostname}:${owms.eureka.port}
+    user:
+      name: user
+      password: sa
     zone: ${owms.eureka.url}/eureka/
   srv:
     hostname: localhost
     protocol: http
+  tracing:
+    url: http://localhost:4317
 
 server:
   port: ${PORT:8155}
@@ -78,8 +85,9 @@ eureka:
     # The cadence of lease renewal, i.e. how often a heartbeat is sent to Eureka server.
     # In this case every 2 seconds. Use this only for development / debugging. In production use the ...
     # Default: 30s
-    lease-renewal-interval-in-seconds: 10
+    lease-renewal-interval-in-seconds: 2
     metadata-map:
+      group: CORE
       username: ${spring.security.user.name}
       password: ${spring.security.user.password}
       protocol: ${owms.srv.protocol}
@@ -93,7 +101,7 @@ eureka:
 
 info:
   scm-url: "@scm.url@"
-  build-url: "https://github.com/spring-labs/@project.artifactId@/actions"
+  build-url: "@ciManagement.url@"
 
 management:
   endpoints:
@@ -103,3 +111,28 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+  health:
+    rabbit:
+      enabled: false
+  info:
+    git:
+      mode: simple
+  metrics:
+    distribution:
+      percentiles-histogram:
+        greeting: true
+        http:
+          server:
+            requests: true
+    tags:
+      application: ${spring.application.name}
+  otlp:
+    tracing:
+      endpoint: ${owms.tracing.url}
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0

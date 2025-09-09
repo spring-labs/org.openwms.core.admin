@@ -15,22 +15,18 @@
  */
 package org.openwms.core.admin;
 
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * A AdminStarter.
+ * A AdminStartupTest.
  *
  * @author Heiko Scherrer
  */
-@SpringBootApplication
-@EnableAdminServer
-@EnableDiscoveryClient
-public class AdminStarter {
+@SpringBootTest
+class AdminStartupTest {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AdminStarter.class, args);
-	}
+    @Test void contextLoads() {
+        // Just try to load the context
+    }
 }
