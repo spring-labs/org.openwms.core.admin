@@ -75,7 +75,7 @@ jobs:
         run: >
           ./mvnw deploy
           -Dci.buildNumber=$GITHUB_RUN_NUMBER
-          -U -B -Prelease,gpg $MAVEN_OPTS
+          -U -B -Prelease,release-central,gpg $MAVEN_OPTS
 
       - name: Build Image
         run: ./scripts/docker_build ${{ steps.version-check.outputs.version }}
