@@ -5,6 +5,24 @@ visualize the state of a distributed microservice application and monitor and co
 It is part of the OpenWMS.org CORE domain because it can also be used outside logistics projects and belongs to the technical infrastructure
 components of a typical microservice application built with Spring Boot.
 
+The service is built with Spring Boot 4.1 / Spring Boot Admin 4.1 and runs on Java 25 (BellSoft Liberica). Metrics of monitored
+services are read via `/actuator/metrics` and log levels are changed via `/actuator/loggers`. The service itself exposes Prometheus
+metrics at `/actuator/prometheus` and exports traces via OTLP to the collector configured with `owms.tracing.url`.
+
+## Build
+
+A JDK 25 and Maven 3.9+ are required to build:
+
+```
+./mvnw verify
+```
+
+The Docker image is based on `bellsoft/liberica-openjre-alpine:25-cds` and built with:
+
+```
+./scripts/docker_build <version>
+```
+
 ![overview][1]
 
 The main purpose in production is to control the log level of single components and categories as well as controlling caches. Viewing the

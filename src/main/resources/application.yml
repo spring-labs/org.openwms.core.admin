@@ -126,9 +126,11 @@ management:
             requests: true
     tags:
       application: ${spring.application.name}
-  otlp:
+  opentelemetry:
     tracing:
-      endpoint: ${owms.tracing.url}
+      export:
+        otlp:
+          endpoint: ${owms.tracing.url}
   prometheus:
     metrics:
       export:
