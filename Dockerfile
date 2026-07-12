@@ -13,7 +13,11 @@ COPY --from=builder /builder/extracted/application/ ./
 # CDS training run: exits on context refresh and writes the archive used at runtime.
 # unset: BuildKit injects OTEL_* variables pointing at its build tracer (unix socket),
 # which Spring Boot would pick up and fail on during the training run.
+# Regenerate the JDK's base CDS archive with the same native-access setting as the runtime
+# below, otherwise the JVM reports a mismatch and disables optimized module handling
+RUN java --enable-native-access=ALL-UNNAMED -Xshare:dump
 RUN unset $(env | cut -d= -f1 | grep ^OTEL_); \
-    java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh \
+    java --enable-native-access=ALL-UNNAMED -XX:ArchiveClassesAtExit=application.jsa \
+    -Dspring.context.exit=onRefresh \
     -Deureka.client.enabled=false -jar application.jar
-ENTRYPOINT ["java", "-XX:SharedArchiveFile=application.jsa", "--enable-native-access=ALL-UNNAMED", "-jar", "application.jar"]
+ENTRYPOINT ["java", "--enable-native-access=ALL-UNNAMED", "-XX:SharedArchiveFile=application.jsa", "-jar", "application.jar"]
