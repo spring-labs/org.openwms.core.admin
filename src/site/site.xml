@@ -32,7 +32,6 @@
         <menu name="Documentation">
             <item name="Home" href="index.html" />
             <item name="Javadoc" href="https://spring-labs.github.io/org.openwms.core.admin/apidocs/index.html" />
-            <item name="Sonar" href="https://sonarcloud.io/dashboard?id=org.openwms:org.openwms.core.admin" />
             <item name="Jacoco" href="https://spring-labs.github.io/org.openwms.core.admin/jacoco-merged-test-coverage-report/index.html" />
         </menu>
         <menu name="Project" ref="reports" />
