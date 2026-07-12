@@ -28,9 +28,6 @@
     </springProfile>
     <springProfile name="LOKI">
         <include resource="logback-loki.xml"/>
-        <!-- The Loki4j appender registers its Micrometer meters at logging-init time, before Spring
-             adds its registries to the global composite - silence the one-time benign notice -->
-        <logger name="io.micrometer.core.instrument.composite.CompositeMeterRegistry" level="ERROR"/>
         <root level="INFO">
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="LOGFILE"/>
