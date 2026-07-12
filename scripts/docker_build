@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build --platform linux/amd64 -t interface21/org.openwms.core.admin:$1 .
+docker build --platform linux/amd64 -t interface21/org.openwms.core.admin:${1:-latest} .
