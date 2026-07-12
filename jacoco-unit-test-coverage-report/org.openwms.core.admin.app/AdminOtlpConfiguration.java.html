@@ -19,24 +19,28 @@ import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * A AdminOtlpConfiguration.
+ * A AdminOtlpConfiguration activates tracing only when the {@literal OTLP} Spring profile defines the {@literal owms.tracing.url}
+ * property.
  *
  * @author Heiko Scherrer
  */
+@ConditionalOnProperty(&quot;owms.tracing.url&quot;)
 @ConditionalOnClass(name = &quot;io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter&quot;)
 @AutoConfiguration
-<span class="nc" id="L32">public class AdminOtlpConfiguration {</span>
+<span class="nc" id="L35">public class AdminOtlpConfiguration {</span>
 
     @Configuration(proxyBeanMethods = false)
+    @ConditionalOnProperty(&quot;owms.tracing.url&quot;)
     @ConditionalOnClass(name = &quot;io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter&quot;)
-<span class="fc" id="L36">    public static class OtelConfiguration {</span>
+<span class="nc" id="L40">    public static class OtelConfiguration {</span>
         @ConditionalOnClass(name = &quot;io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter&quot;)
         public @Bean OtlpGrpcSpanExporter otlpHttpSpanExporter(@Value(&quot;${owms.tracing.url}&quot;) String url) {
-<span class="fc" id="L39">            return OtlpGrpcSpanExporter.builder().setEndpoint(url).build();</span>
+<span class="nc" id="L43">            return OtlpGrpcSpanExporter.builder().setEndpoint(url).build();</span>
         }
     }
 }
