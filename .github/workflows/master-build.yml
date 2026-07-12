@@ -56,16 +56,6 @@ jobs:
               "id": "central-portal-snapshots",
               "username": "${{ secrets.OSSRH_USERNAME }}",
               "password": "${{ secrets.OSSRH_PASSWORD }}"
-            },
-            {
-              "id": "interface21-snapshots",
-              "username": "${{ secrets.REPO_USERNAME }}",
-              "password": "${{ secrets.REPO_PASSWORD }}"
-            },
-            {
-              "id": "interface21-releases",
-              "username": "${{ secrets.REPO_USERNAME }}",
-              "password": "${{ secrets.REPO_PASSWORD }}"
             }]
 
       - name: Import GPG key
