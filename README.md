@@ -17,6 +17,15 @@ A JDK 25 and Maven 3.9+ are required to build:
 ./mvnw verify
 ```
 
+Run the packaged application with:
+
+```
+java --enable-native-access=ALL-UNNAMED -jar target/openwms-core-admin-exec.jar
+```
+
+The `--enable-native-access=ALL-UNNAMED` flag grants Netty native access on JDK 24+ (JEP 472) and avoids restricted-method warnings
+at startup. The Docker image already sets it in its ENTRYPOINT.
+
 The Docker image is based on `bellsoft/liberica-openjre-alpine:25-cds`. The CI pipeline builds and pushes it as a multi-arch image for
 `linux/amd64` and `linux/arm64` with Docker Buildx, published under a single tag (`interface21/org.openwms.core.admin:<version>`), so
 Docker pulls the matching architecture automatically. A local single-arch image can be built with:

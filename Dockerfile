@@ -10,4 +10,4 @@ COPY --from=builder /application/extracted/dependencies/ ./
 COPY --from=builder /application/extracted/spring-boot-loader/ ./
 COPY --from=builder /application/extracted/snapshot-dependencies/ ./
 COPY --from=builder /application/extracted/application/ ./
-ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
+ENTRYPOINT ["java", "--enable-native-access=ALL-UNNAMED", "org.springframework.boot.loader.launch.JarLauncher"]

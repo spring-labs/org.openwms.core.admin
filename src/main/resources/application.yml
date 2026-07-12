@@ -47,6 +47,8 @@ spring:
     user:
       name: user
       password: sa
+  thymeleaf:
+    check-template-location: false # Thymeleaf comes transitively with SBA that holds the templates, this app has no own ones
 
 owms:
   admin:
