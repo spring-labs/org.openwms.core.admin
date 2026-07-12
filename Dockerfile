@@ -10,7 +10,10 @@ COPY --from=builder /builder/extracted/dependencies/ ./
 COPY --from=builder /builder/extracted/spring-boot-loader/ ./
 COPY --from=builder /builder/extracted/snapshot-dependencies/ ./
 COPY --from=builder /builder/extracted/application/ ./
-# CDS training run: exits on context refresh and writes the archive used at runtime
-RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh \
+# CDS training run: exits on context refresh and writes the archive used at runtime.
+# unset: BuildKit injects OTEL_* variables pointing at its build tracer (unix socket),
+# which Spring Boot would pick up and fail on during the training run.
+RUN unset $(env | cut -d= -f1 | grep ^OTEL_); \
+    java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh \
     -Deureka.client.enabled=false -jar application.jar
 ENTRYPOINT ["java", "-XX:SharedArchiveFile=application.jsa", "--enable-native-access=ALL-UNNAMED", "-jar", "application.jar"]
