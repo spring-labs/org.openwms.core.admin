@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjre-alpine:25-cds AS builder
+FROM --platform=$BUILDPLATFORM bellsoft/liberica-openjre-alpine:25-cds AS builder
 WORKDIR /application
 ARG JAR_FILE=target/openwms-core-admin-exec.jar
 COPY ${JAR_FILE} application.jar

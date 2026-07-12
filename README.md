@@ -17,7 +17,9 @@ A JDK 25 and Maven 3.9+ are required to build:
 ./mvnw verify
 ```
 
-The Docker image is based on `bellsoft/liberica-openjre-alpine:25-cds` and built with:
+The Docker image is based on `bellsoft/liberica-openjre-alpine:25-cds`. The CI pipeline builds and pushes it as a multi-arch image for
+`linux/amd64` and `linux/arm64` with Docker Buildx, published under a single tag (`interface21/org.openwms.core.admin:<version>`), so
+Docker pulls the matching architecture automatically. A local single-arch image can be built with:
 
 ```
 ./scripts/docker_build <version>
@@ -41,7 +43,7 @@ Additional configuration parameter has been added or preset to the configuration
 | `owms.eureka.zone`           | `${owms.eureka.url}/eureka/`    | URI to get the zone settings from Eureka discovery server                                           |
 | `owms.srv.hostname`          | `localhost`                     | Hostname that is used to register the Admin UI at the discovery server                              |
 | `owms.srv.protocol`          | `http`                          | Port that is used to register the Admin UI at the discovery server                                  |
-| `owms.tracing.url`           | `http://localhost:4317`         | URL to the OpenTelemetry server                                                                     |
+| `owms.tracing.url`           | `http://localhost:4317`         | URL to the OpenTelemetry server (only defined with the `OTLP` profile)                              |
 | `server.port`                | `${PORT:8155}`                  | Port where the Admin UI web server listening at                                                     |
 
 Supported Spring profiles:
@@ -50,5 +52,6 @@ Supported Spring profiles:
 |--------------|----------------------------------------------------------------------------------------------------------------------------|
 | `ELK`        | All logs and traces are pushed to Logstash (via syslog) expected to listen on a server with hostname `elk` and port `5000` | 
 | `LOKI`       | All logs and traces are pushed to a Loki server (expected to listen on a server with hostname `loki` and port `3100`       | 
+| `OTLP`       | Enables distributed tracing: spans are exported via OTLP/gRPC to the collector configured with `owms.tracing.url`          | 
 
 [1]: src/site/resources/images/overview.png
