@@ -47,6 +47,9 @@ spring:
     user:
       name: user
       password: sa
+  threads:
+    virtual:
+      enabled: true
   thymeleaf:
     check-template-location: false # Thymeleaf comes transitively with SBA that holds the templates, this app has no own ones
 
