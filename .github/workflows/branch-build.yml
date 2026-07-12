@@ -4,7 +4,15 @@ on:
     branches-ignore:
       - master
       - gh-pages
-      - 'release/**'
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
@@ -13,22 +21,34 @@ jobs:
   build_job:
     runs-on: ubuntu-latest
     name: Build & Test Microservice
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
-          distribution: liberica
+          distribution: 'liberica'
           java-version: 25
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+          cache: maven
+
       - name: Build
         run: >
-          ./mvnw verify
+          ./mvnw clean verify
           -Dci.buildNumber=$GITHUB_RUN_NUMBER
-          -U -B $MAVEN_OPTS
+          -U -B
+
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+          retention-days: 7
+
+      - name: Validate Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: interface21/org.openwms.core.admin:branch

@@ -4,7 +4,8 @@
     <variable scope="context" name="mdcPattern" value="%replace(;%X{MSGKEY};%X{MSGDATA}){';+( |$)', ''}" />
 
     <property name="LOG_TEMP" value="/tmp/owms"/>
-    <property name="MODULE_NAME" value="CORE-Admin"/>
+    <property name="MODULE_NAME" value="CORE"/>
+    <property name="SERVICE_NAME" value="Admin"/>
 
     <include resource="logback-loki.xml"/>
     <include resource="logback-appenders.xml"/>
